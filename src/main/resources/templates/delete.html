@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handing Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <style type="text/css">    
+           * { margin: 0; padding: 0; }
+           p { padding: 10px; }
+           #left { position: absolute; left: 0; top: 0; width: 50%; }
+           #right { position: absolute; right: 0; top: 0; width: 50%; } 
+        </style>
+
+</head>
+<body>
+
+   <div id="left">
+    <p>Welcome to the   <a href="/ "> World of Lord  </a></p>
+    <p> Add Lord   <a href="/lord"> here </a></p>
+    <p> Add  Planet  <a href="/planet"> here </a></p>
+    <p> Delete Planet  <a href="/delete"> here </a></p>
+    <p> Top  Lords  <a href="/top"> here </a></p>
+   <p> Lazy Lords  <a href="/lazy"> here </a></p> 
+
+  </div>
+<div id="right"> 
+
+    <h1>DeletePlanet</h1>
+    <form action="#" th:action="@{/delete}" th:object="${planet}" method="post">
+ 
+
+  	<p> DeletePlanetName:<select th:field="*{name}"> 
+  <option value=""> --- </option>
+
+             <option th:each="planetLists: ${planetList}" th:value="${planetLists.getName()}" th:text="${planetLists.getName()}"></option>
+        </select>	</p>
+        <p><input type="submit" value="Submit" /> 
+ <input type="submit" value="Update" /></p>
+    </form>
+
+  
+     <p th:text="'DeletePlanetName ' + ${planet.getName() }+ '!'" />
+ 
+  <table>
+      <tr>
+       
+        <th>NAME </th>
+       <th>LORD</th>
+    </tr>   
+        <tr th:block th:each="lists : ${planetList}">
+    <td th:utext="${lists.getName()}+' '">..</td>
+           <td th:if="${lists.getLord()!=null}" th:utext="${lists.getLord().getName()}">..</td>         
+
+ 
+        </th:block>  
+ </tr> 
+ 
+ 
+  </table>
+
+    
+  </div> 
+ 
+ 
+</body>
+</html>
